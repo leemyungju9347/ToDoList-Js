@@ -1,2 +1,2 @@
 # ToDoList-js
-Vanila JS ToDoList App 📝
+Vanilla JS ToDoList App 📝
