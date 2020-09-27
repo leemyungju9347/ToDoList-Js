@@ -1,0 +1,83 @@
+@font-face { 
+    font-family: 'MaplestoryOTFBold'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+@font-face { 
+    font-family: 'Recipekorea'; 
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/Recipekorea.woff') format('woff'); 
+    font-weight: normal; font-style: normal; 
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+html {
+    font-size:100%;
+}
+
+body {
+	font-size:12px;
+	line-height:1.6;
+	margin:0;
+	padding:0;
+    word-break: keep-all;
+    font-family: 'Recipekorea';
+}
+h1, h2, h3, h4, h5, h6 {font-size:1em;}
+h1, h2, h3, h4, h5, h6, div, p, dl, dt, dd, ul, ol, li, form, fieldset, blockquote, address, table, thead, tbody, tfoot, tr, td, caption {
+	margin:0;
+	padding:0;
+}
+em,i {font-style: normal;}
+ul, ol, li {list-style:none;}
+a:link, a:visited {color: #3B3B3B;text-decoration:none;}
+strong, span, p {color: #3B3B3B;}
+
+
+button:focus,
+input:focus,
+select:focus {
+	outline: none;
+	outline-offset:unset;
+}
+
+input,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000s ease-in-out 0s;
+	-webkit-text-fill-color: #585858 !important;
+}
+
+/* input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+input:focus::-ms-input-placeholder {
+    color: transparent;
+} */
+
+
+
+button {
+	cursor: pointer;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
