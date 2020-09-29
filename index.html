@@ -10,29 +10,44 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="greetings-area"></div>
+        <div class="greetings-area">
+            <form action="" class="greetings-form">
+                <h4>to do list book</h4>
+                <input type="text" 
+                onfocus="this.placeholder = ''" 
+                onblur="this.placeholder = '이름을 입력해주세요.'"
+                placeholder="이름을 입력해주세요.">
+                <button><i class="fas fa-long-arrow-alt-right"></i></button>
+            </form>
+        </div>
         <div class="todolist-area">
             <h1>TO DO LIST</h1>
-            <form class="form" action="" class="todolist-form">
+            <p class="sub-title">
+                <span class="username"></span>
+                <!-- <span class="title-message">myungjoo's today list</span> -->
+            </p>
+            <span class="date">09/29 Tue</span>
+            <form class="todo-form" action="">
                 <input class="todo-input" type="text" 
                 placeholder="할일을 입력해주세요." 
                 onfocus="this.placeholder = ''" onblur="this.placeholder = '할일을 입력해주세요.'">
-                <button><i class="fas fa-plus"></i></button>
+                <button class="add-btn"><i class="fas fa-plus"></i></button>
             </form>
             <div class="todolist-content">
-                <ul class="todolist">
-                    <li><span>001</span></li>
-                    <li><span>002</span></li>
-                    <li><span>003</span></li>
-                    <li><span>004</span></li>
-                    <li><span>005</span></li>
-                    <li><span>006</span></li>
-                    <li><span>007</span></li>
-                    <li><span>008</span></li>
-                    <li><span>009</span></li>
-                    <li><span>010</span></li>
-                    <li><span>001</span></li>
-                    
+                <ul>
+                     <!-- <li class="checked">
+                        <input class="checkbox" type="checkbox" name="" id="complete">
+                        <label for="complete"><span><i class="fas fa-check"></i></span></label>
+                        <span>넷플릭스 보기</span>
+                        <div class="btn-box">
+                            <button class="edit-btn">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button class="delete-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </li> -->
                 </ul>
                 <div class="circles">
                     <div class="circle"></div>
@@ -40,8 +55,8 @@
                     <div class="circle"></div>
                 </div>
             </div>
-            
         </div>
     </div>
+    <script src="./js/main.js"></script>
 </body>
 </html>

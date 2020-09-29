@@ -1,46 +1,68 @@
-body {
-    background-color: #fff6e4;
-    background-color: #FFE149;
-    overflow-y: scroll;
-}
-
-/* scroll */
-*::-webkit-scrollbar {
-	width: 10px;
-}
-*::-webkit-scrollbar-track {
-  background-color: transparent;
-}
-*::-webkit-scrollbar-thumb {
-	border-radius: 9px;
-	width: auto;
-    background-color: #26827780;
-}
-*::-webkit-scrollbar-button {
-  width: 0;
-  height: 0;
-}
-
+/*----------common------------*/
 .wrap {
     height: 100%;
     padding: 30px;
 }
 
 .greetings-area {
+    /* background-color: cornflowerblue;*/
+    background-color: #00000069;
+    position: fixed;;
+    top: 0;
+    left:0;
+    width:100%;
+    height: 100%;
+    z-index: 1000;
     display: none;
+}
+
+.greetings-area > .greetings-form {
+    background-color: #2d2d2d;
+    width:450px;
+    height: 250px;
+    border-radius: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 30px;
+}
+
+.greetings-area > .greetings-form > h4 {
+    color: #fff;
+    font-size: 1.8em;
+}
+
+.greetings-area > .greetings-form > input {
+    -webkit-text-fill-color: #fff !important;
+    font-size: 2em;
+    border-bottom: 2px solid #fff;
+    padding: 5px 10px;
+    margin-top: 50px;
+}
+
+.greetings-area > .greetings-form > button {
+    color: #fff;
+    font-size: 2.5em;
+    position: absolute;
+    right: 63px;
+    top: 117px;
+
 }
 
 .todolist-area {
     border:5px solid #000;
     width: 50%;
-    /* height: 100%; */
     margin:50px auto 0;
+    margin: 0 auto;
     background-color: #fff;
     position: relative;
     overflow: hidden;
-    /* padding: 20px 0; */
     /* box-shadow: 5px 9px 11px 6px #8080804f; */
+    box-shadow: 8px 7px 13px 6px #74747447;
     border-radius: 5px;
+    min-width: 700px;
 }
 
 .todolist-area::after {
@@ -62,29 +84,40 @@ body {
     padding-top: 20px;
 }
 
-.todolist-area > .form {
+.todolist-area > .sub-title {
+    font-size:1.5em;
+    text-align: center;
+    margin-top: 10px;
+    letter-spacing:1.2px;
+}
+
+.todolist-area > .sub-title > span {
+    color: #268277;
+}
+
+.todolist-area > .date {
+    position: absolute;
+    font-size: 1.2em;
+    right: 16px;
+    top: 285px;
+}
+
+.todolist-area > .todo-form {
     width:50%;
-    margin:30px auto 0;
+    margin:50px auto 0;
     position: relative;
 }
 
-.todolist-area > .form > .todo-input {
-    background-color:transparent;
-    border: none;
+.todolist-area > .todo-form > .todo-input {
     border-bottom: 2px solid #1e4ba0;
     width: 100%;
     padding: 5px;
-    font-family: 'Recipekorea';
     letter-spacing: 2px;
     font-size: 1.5em;
 }
 
-/* .todolist-area > .form > .todo-input:focus {
-    color: transparent;
-} */
 
-
-.todolist-area > .form > button {
+.todolist-area > .todo-form > .add-btn {
     background-color: transparent;
     border: none;
     position: absolute;
@@ -96,30 +129,115 @@ body {
 
 .todolist-area > .todolist-content {
     width: 100%;
-    margin-top: 50px;
-    height: 100%;
+    margin-top:70px;
+    /* height:400px; */
     position: relative;
     background: repeating-linear-gradient(#1e4ba0, #1e4ba0 5px, #fff 0, #fff 55px);
+    /* overflow-y: scroll; */
 }
 
-.todolist-area > .todolist-content > .todolist {
+.todolist-area > .todolist-content > ul {
     padding-left:100px;
     /* height: 450px; */
     /* overflow-y: scroll; */
 }
 
-.todolist-area > .todolist-content > .todolist > li {
+.todolist-area > .todolist-content > ul::after {
+    content: '';
+    font-size: 2em;
+    width:100%;
+    height: 350px;
+    display: block;
+}
+
+.todolist-area > .todolist-content > ul > li {
     font-size:1.5em;
     padding-top: 20px;
     padding-bottom: 6px;
+    position: relative;
 }
 
-.todolist-area > .todolist-content > .todolist > li > span {
-}
-
-.todolist-area > .todolist-content > .todolist > li + li {
+.todolist-area > .todolist-content > ul > li + li {
     /* margin-top: 10px; */
 }
+
+.todolist-area > .todolist-content > ul > li > .checkbox {
+    display: none;
+}
+
+.todolist-area > .todolist-content > ul > li > .checkbox[type="checkbox"] + label {
+    margin-right: 5px;
+}
+
+.todolist-area > .todolist-content > ul > li > .checkbox[type="checkbox"] + label > span {
+    border: 2px dotted #535353;
+    border: 2px dotted #1e4ba0;
+    display: inline-block;
+    width:15px;
+    height:15px;
+    border-radius:3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.todolist-area > .todolist-content > ul > li > .checkbox[type="checkbox"] + label > span > i {
+    font-size: 0.9em;
+    color: #000;
+    position: absolute;
+    top: -4px;
+    display: none;
+}
+
+.todolist-area > .todolist-content > ul > li.checked > .checkbox[type="checkbox"] + label > span > i {
+    display: block;
+}
+
+.todolist-area > .todolist-content > ul > li > .checkbox[type="checkbox"]:checked + label {
+
+}
+
+.todolist-area > .todolist-content > ul > li > span {
+    margin-left:10px;
+    position: relative;
+}
+
+.todolist-area > .todolist-content > ul > li > span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    height: 3px;
+    width: 100%;
+    background-color: #dd2f0d;
+    display: none;
+}
+
+.todolist-area > .todolist-content > ul > li.checked > span::before {
+    display: block;
+}
+
+.todolist-area > .todolist-content > ul > li > .btn-box {
+    position: absolute;
+    right:30px;
+    top: 18px;
+}
+
+.todolist-area > .todolist-content > ul > li > .btn-box > button {
+    font-size: 1em;
+}
+
+.todolist-area > .todolist-content > ul > li > .btn-box > .edit-btn > i {
+    color: #248574;
+}
+.todolist-area > .todolist-content > ul> li > .btn-box > .delete-btn {
+    margin-left: 10px;
+}
+
+
+.todolist-area > .todolist-content > ul > li > .btn-box > .delete-btn > i {
+    color: #dd2f0d;
+}
+
 
 .circles {
     position: absolute;
@@ -142,3 +260,101 @@ body {
 .circles > .circle + .circle {
     margin-top:120px;
 }
+
+
+/* .intro {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#db553c;
+    background-color: #148c75;
+    padding-left: 80px;
+    z-index: 1000;
+    display: none;
+}
+
+.intro > .intro-inner {
+    background-color: #fff6e4;
+    height: 100%;
+} */
+
+/* .intro > .intro-inner > .subject {
+    background-color:#fff;
+    width:300px;
+    height: 150px;
+    position: absolute;
+    left: 50%;
+    top:150px;
+    transform: translateX(-50%);
+    border-radius:20px;
+    border: 2px dotted #a2a2a2;
+    padding: 10px;
+    
+} */
+
+/* .intro > .intro-inner > .subject > .subject-inner {
+    border: 1px solid black;
+    border: 2px dotted #a2a2a2;
+    height: 100%;
+    width: 100%;
+    border-radius:20px;
+    padding: 30px;
+    text-align: center;
+}
+
+.intro > .intro-inner > .subject > .subject-inner > span {
+    font-size: 1.5em;
+}
+
+.intro > .intro-inner > .subject > .subject-inner >  h4 {
+    font-size:1.8em;
+    border-bottom: 1px solid lightgray;
+    color: #1e4ba0;
+}
+
+.intro > .intro-inner > strong {
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    top:330px;
+    font-size: 2em;
+    padding: 0 5px 5px;
+    border-bottom:3px solid #1e4ba0;
+    display: none;
+}
+ */
+
+
+
+/* .intro > .intro-inner > .subject > .subject-inner >  p {
+    font-size:1.8em;
+    border-bottom: 1px solid lightgray;
+    text-align: center;
+    margin-top: 10px;
+} */
+
+/* .intro > .intro-inner > .subject > h4 {
+    font-size:1.8em;
+    text-align: center;
+    color: #1e4ba0;
+}
+
+.intro > .intro-inner > .subject > h4 > span {
+    color: #000;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.intro > .intro-inner > .subject::before {
+    content: '';
+    position: absolute;
+    background-color: #db553c;
+    width: 110px;
+    height: 33px;
+    transform: rotateZ(-31deg);
+    left: -30px;
+    top: 7px;
+    display: none;
+} */
