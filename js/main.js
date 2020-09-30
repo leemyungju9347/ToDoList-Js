@@ -65,13 +65,12 @@ init();
 const todoForm = document.querySelector('.todolist-area > .todo-form')
 const todoInput = todoForm.querySelector('.todo-input');
 const todoList = document.querySelector('.todolist-content > ul');
-
 const localTodo = 'toDos';
 
 let toDos = [];
 
 
-// 삭제
+// delete 이벤트
 function deleteTodo(event){
     const btn = event.target
     const li = btn.parentNode.parentNode.parentNode;
@@ -82,71 +81,147 @@ function deleteTodo(event){
         return item.id !== parseInt(li.id)
     });
 
-    console.log(cleanTodos);
     toDos = cleanTodos;
+
+    console.log(toDos);
+    console.log(toDos.length);
+    console.log('여기는 딜리트');
+    const lis = todoList.querySelectorAll('li');
+
+    toDos.forEach((item,index) => {
+        console.log(item.id);
+        item.id = index + 1;
+        lis[index].id = item.id
+    })
+
     saveToDos();
 }
 
+// check 이벤트
 function checkTodo(event){
-    console.log(event.target.parentNode.parentNode);
+    // console.log(event.target.parentNode.parentNode);
     const btn = event.target;
-    const li = btn.parentNode.parentNode;
+    const li = btn.parentNode.parentNode.parentNode;
+    const id  = li.id - 1;
+
+    console.log(toDos[id].check);
+    console.log(toDos[id]);
+    
+    // 체크
+    if( toDos[id].check !== 'check' ){
+        console.log(toDos[id]);
+        li.classList.add('checked');
+        toDos[id].check = 'check';
+    
+    // 체크해제
+    }else {
+        li.classList.remove('checked');
+        toDos[id].check = 'none';
+    }
+
+    saveToDos();
+    
+}
+
+let status = true;
+let editIndex = null;
+let target = null
+
+// edit 이벤트
+function editTodo(event) {
+    target = event.target.parentNode.parentNode.parentNode;
+    editIndex = target.id - 1;
+    
+    if ( toDos[editIndex].check === 'check' ) return;
+
+    status = false;
+    todoInput.value = toDos[editIndex].text;
 
     
 }
+
+function editSubmit(){
+    if( !status ) {
+
+        const txtSpan = target.querySelector('.todo-txt');
+
+        toDos[editIndex].text = todoInput.value;
+        txtSpan.innerText = todoInput.value;
+
+        todoInput.value = '';
+
+        status = true;
+        saveToDos();
+    }
+
+    
+}
+
+
 
 // 투두리스트 배열을 로컬에 저장하는 함수
 function saveToDos(){
-    localStorage.setItem(localTodo,JSON.stringify(toDos))
-    
+    localStorage.setItem(localTodo,JSON.stringify(toDos));
 }
 
 
 
-function paintTodo(text){
-    console.log(text);
+function paintTodo(text,check){
     const li = document.createElement('li');
-    // const editBtn = document.createElement('edit');
     const btnBox = document.createElement('div');
     const deleteBtn = document.createElement('button');
-    const btnIcon = document.createElement('i');
-    const editBtn = document.querySelector('button');
-    const span = document.createElement('span');
+    const deleteBtnIcon = document.createElement('i');
+    const editBtn = document.createElement('button');
+    const editBtnIcon = document.createElement('i');
+    const todoTxtspan = document.createElement('span');
     const input = document.createElement('input');
     const label = document.createElement('label');
     const labelSpan = document.createElement('span');
     const labelIcon = document.createElement('i');
     const newId = toDos.length + 1;
 
+    todoTxtspan.classList.add('todo-txt')
+
     li.id = newId;
 
     input.type = 'checkbox';
     input.id = 'complete';
     input.classList.add('checkbox');
+
     labelIcon.classList.add('fas');
     labelIcon.classList.add('fa-check');
     label.setAttribute('for','complete');
 
-    btnBox.classList.add('btn-box');
-    deleteBtn.classList.add('delete-btn');
-    btnIcon.classList.add('fas');
-    btnIcon.classList.add('fa-times');
-    
-    deleteBtn.addEventListener('click',deleteTodo);
-    labelSpan.addEventListener('click',checkTodo)
-
-    btnBox.appendChild(deleteBtn);
-    deleteBtn.appendChild(btnIcon)
-
     label.appendChild(labelSpan);
     labelSpan.appendChild(labelIcon);
 
-    span.innerHTML = text;
+    // 삭제버튼
+    btnBox.classList.add('btn-box');
+    deleteBtn.classList.add('delete-btn');
+    deleteBtnIcon.classList.add('fas');
+    deleteBtnIcon.classList.add('fa-times');
+
+    // 수정버튼
+    editBtn.classList.add('edit-btn');
+    editBtnIcon.classList.add('fas');
+    editBtnIcon.classList.add('fa-pen');
+    
+    // 클릭이벤트
+    deleteBtn.addEventListener('click',deleteTodo);
+    labelSpan.addEventListener('click',checkTodo);
+    editBtn.addEventListener('click',editTodo)
+
+    btnBox.appendChild(editBtn);
+    editBtn.appendChild(editBtnIcon);
+
+    btnBox.appendChild(deleteBtn);
+    deleteBtn.appendChild(deleteBtnIcon);
+
+    todoTxtspan.innerHTML = text;
     
     li.appendChild(input);
     li.appendChild(label);
-    li.appendChild(span);
-
+    li.appendChild(todoTxtspan);
     li.appendChild(btnBox);
     
 
@@ -155,7 +230,8 @@ function paintTodo(text){
 
     const toDoObj = {
         text : text,
-        id : newId
+        id : newId,
+        check:check
     }
 
     toDos.push(toDoObj);
@@ -164,32 +240,53 @@ function paintTodo(text){
     
 }
 
+// todolist submit
 function listSubmit(ev){
     ev.preventDefault();
     const currentValue = todoInput.value;
-    paintTodo(currentValue)
+    const check = 'none';
 
-    todoInput.value = '';
+    if( status ) {
+        console.log('투두리스트 서브밋');
+        paintTodo(currentValue,check)
+        todoInput.value = '';
+
+    }else return false
+
+    
 }
 
+// 첫 로드시 로컬에서 투두리스트 가져오기
 function loadTodos(){
     const loadedTodos = localStorage.getItem(localTodo);
 
     // 로컬에 없으면 
     if( loadedTodos !== null ){
-        console.log(loadedTodos);
-        const parsedTodos = JSON.parse(loadedTodos);
-        console.log(parsedTodos);
+        const parsedTodos = JSON.parse(loadedTodos); // JSON 변환
+
+        // paint에 넘겨줌
         parsedTodos.forEach(item =>{
-            paintTodo(item.text)
+            paintTodo(item.text,item.check);
         })
     }
 }
 
-function todoInit(){
+// init
+function todoInit(){   
     loadTodos();
 
-    todoForm.addEventListener('submit',listSubmit)
+    // todolist 입력 이벤트
+    todoForm.addEventListener('submit',listSubmit);
+    todoForm.addEventListener('submit',editSubmit);
+
+    const lis = document.querySelectorAll('li');
+    
+    //로드시 체크된 항목에 클래스리스트 추가
+    toDos.forEach(item=>{
+        if(item.check === 'check') {
+            lis[item.id - 1].classList.add('checked')
+        }
+    })
 }
 
 todoInit();

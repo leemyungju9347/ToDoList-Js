@@ -99,12 +99,12 @@
     position: absolute;
     font-size: 1.2em;
     right: 16px;
-    top: 285px;
+    top: 274px;
 }
 
 .todolist-area > .todo-form {
     width:50%;
-    margin:50px auto 0;
+    margin:40px auto 0;
     position: relative;
 }
 
@@ -182,14 +182,14 @@
 
 .todolist-area > .todolist-content > ul > li > .checkbox[type="checkbox"] + label > span > i {
     font-size: 0.9em;
-    color: #000;
     position: absolute;
     top: -4px;
-    display: none;
+    color: transparent;
 }
 
 .todolist-area > .todolist-content > ul > li.checked > .checkbox[type="checkbox"] + label > span > i {
     display: block;
+    color: #000;
 }
 
 .todolist-area > .todolist-content > ul > li > .checkbox[type="checkbox"]:checked + label {
@@ -230,7 +230,7 @@
     color: #248574;
 }
 .todolist-area > .todolist-content > ul> li > .btn-box > .delete-btn {
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 
