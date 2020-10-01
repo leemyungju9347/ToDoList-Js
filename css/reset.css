@@ -43,15 +43,21 @@ h1, h2, h3, h4, h5, h6, div, p, dl, dt, dd, ul, ol, li, form, fieldset, blockquo
 }
 em,i {font-style: normal;}
 ul, ol, li {list-style:none;}
-a:link, a:visited {color: #3B3B3B;text-decoration:none;}
+a:link, a:visited {
+    color: #3B3B3B;
+    text-decoration:none;
+}
 strong, span, p {color: #3B3B3B;}
 
-
+span:focus,
+a:focus,
 button:focus,
 input:focus,
 select:focus {
 	outline: none;
-	outline-offset:unset;
+    outline-offset:unset;
+    /* outline: -webkit-focus-ring-color auto 0;
+    outline-color:none */
 }
 
 /* input,

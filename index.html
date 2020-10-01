@@ -23,18 +23,25 @@
         <div class="todolist-area">
             <h1>TO DO LIST</h1>
             <p class="sub-title">
-                <span class="username"></span>
-                <!-- <span class="title-message">myungjoo's today list</span> -->
+                <span class="username" contenteditable="true"></span>
+                <span class="title-msg"></span>
             </p>
-            <span class="date">09/29 Tue</span>
+            <span class="date"></span>
             <form class="todo-form" action="">
                 <input class="todo-input" type="text" 
                 placeholder="할일을 입력해주세요." 
-                onfocus="this.placeholder = ''" onblur="this.placeholder = '할일을 입력해주세요.'">
-                <button class="add-btn"><i class="fas fa-plus"></i></button>
+                onfocus="this.placeholder = ''" 
+                onblur="this.placeholder = '할일을 입력해주세요.'">
+                <button class="add-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
             </form>
             <div class="todolist-content">
                 <ul></ul>
+                <div class="empty-box">
+                    <p>할일을 채워주세요.</p>
+                </div>
+                <button class="clear-btn">clear all</button>
                 <div class="circles">
                     <div class="circle"></div>
                     <div class="circle"></div>

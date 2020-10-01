@@ -1,4 +1,20 @@
 /*----------common------------*/
+.text-fade {
+    -webkit-animation: txtAni .5s ease-out both;
+    animation: txtAni .5s ease-out both;
+}
+
+@-webkit-keyframes txtAni {
+    0%{
+        /* transform:translateY(50px); */
+        opacity: 0;
+      }
+      100%{
+          /* transform: translateY(0); */
+          opacity: 1;
+      }
+}
+
 .wrap {
     height: 100%;
     padding: 30px;
@@ -27,6 +43,20 @@
     transform: translate(-50%,-50%);
     text-align: center;
     padding: 30px;
+    -webkit-animation: pageUp .5s ease-out both;
+    animation: pageUp .7s ease-out both;
+}
+
+
+@-webkit-keyframes pageUp {
+    0%{
+        top: 0;
+      }
+      100%{
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
 }
 
 .greetings-area > .greetings-form > h4 {
@@ -63,6 +93,7 @@
     box-shadow: 8px 7px 13px 6px #74747447;
     border-radius: 5px;
     min-width: 700px;
+    text-align: center;
 }
 
 .todolist-area::after {
@@ -78,28 +109,46 @@
 
 .todolist-area > h1 {
     font-size: 5em;
-    /* color:#248574; */
     text-align: center;
     font-family: 'Recipekorea'; 
     padding-top: 20px;
 }
 
 .todolist-area > .sub-title {
-    font-size:1.5em;
-    text-align: center;
+    font-size:2em;
     margin-top: 10px;
     letter-spacing:1.2px;
+    display: inline-block;
 }
 
-.todolist-area > .sub-title > span {
+.todolist-area > .sub-title > .username {
     color: #268277;
+    padding: 5px 3px 0;
+}
+
+.todolist-area > .sub-title > .username > br {
+    display: none;
+}
+
+.todolist-area > .sub-title > .username:hover {
+    /* border-bottom: 2px solid #000; */
+    cursor: text;
+    text-decoration: underline;
+    text-underline-position: under
+}
+
+.todolist-area > .sub-title > .username:focus-within {
+    background-color: #d5d5d5;
+    text-decoration: underline;
+    text-underline-position: under
+    /* border-bottom: 2px solid #000; */
 }
 
 .todolist-area > .date {
     position: absolute;
     font-size: 1.2em;
     right: 16px;
-    top: 274px;
+    top: 283px;
 }
 
 .todolist-area > .todo-form {
@@ -130,6 +179,7 @@
 .todolist-area > .todolist-content {
     width: 100%;
     margin-top:70px;
+    text-align: left;
     /* height:400px; */
     position: relative;
     background: repeating-linear-gradient(#1e4ba0, #1e4ba0 5px, #fff 0, #fff 55px);
@@ -142,19 +192,62 @@
     /* overflow-y: scroll; */
 }
 
-.todolist-area > .todolist-content > ul::after {
-    content: '';
+.todolist-area > .todolist-content > .empty-box {
+    height:350px;
+}
+
+.todolist-area > .todolist-content > .empty-box > p {
+    position: absolute;
+    font-size:3em;
+    z-index: 1000;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 117px;
+    /* width: 100%; */
+    text-align: center;
+    color: #ababab;
+    /* background-color: #ffffff; */
+}
+
+/* .todolist-area > .todolist-content > ul::after {
+    content: '할일을 추가해주세요.';
     font-size: 2em;
     width:100%;
     height: 350px;
     display: block;
-}
+    position: absolute;
+} */
+
+/* 
+.todolist-area > .todolist-content > ul.off::after {
+    height: 0;
+    display: none;
+} */
 
 .todolist-area > .todolist-content > ul > li {
     font-size:1.5em;
     padding-top: 20px;
     padding-bottom: 6px;
     position: relative;
+
+    
+}
+
+.list-ani {
+    -webkit-animation: listOn .5s ease-out both;
+    animation: listOn .5s ease-out both;
+}
+
+@-webkit-keyframes listOn {
+    0%{
+        transform:translateX(50px);
+        opacity: 0;
+      }
+
+      100%{
+          transform: translateX(0);
+          opacity: 1;
+      }
 }
 
 .todolist-area > .todolist-content > ul > li + li {
@@ -201,12 +294,16 @@
     position: relative;
 }
 
+.todolist-area > .todolist-content > ul > li.checked > span {
+    color: #a6a6a6;
+}
+
 .todolist-area > .todolist-content > ul > li > span::before {
     content: '';
     position: absolute;
     left: 0;
     top: 8px;
-    height: 3px;
+    height: 4px;
     width: 100%;
     background-color: #dd2f0d;
     display: none;
@@ -238,6 +335,15 @@
     color: #dd2f0d;
 }
 
+.todolist-area > .todolist-content > .clear-btn {
+    font-family: 'Recipekorea'; 
+    position: absolute;
+    color: #818181;
+    top: -25px;
+    left: 94px;
+    display: none;
+}
+
 
 .circles {
     position: absolute;
@@ -260,101 +366,3 @@
 .circles > .circle + .circle {
     margin-top:120px;
 }
-
-
-/* .intro {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color:#db553c;
-    background-color: #148c75;
-    padding-left: 80px;
-    z-index: 1000;
-    display: none;
-}
-
-.intro > .intro-inner {
-    background-color: #fff6e4;
-    height: 100%;
-} */
-
-/* .intro > .intro-inner > .subject {
-    background-color:#fff;
-    width:300px;
-    height: 150px;
-    position: absolute;
-    left: 50%;
-    top:150px;
-    transform: translateX(-50%);
-    border-radius:20px;
-    border: 2px dotted #a2a2a2;
-    padding: 10px;
-    
-} */
-
-/* .intro > .intro-inner > .subject > .subject-inner {
-    border: 1px solid black;
-    border: 2px dotted #a2a2a2;
-    height: 100%;
-    width: 100%;
-    border-radius:20px;
-    padding: 30px;
-    text-align: center;
-}
-
-.intro > .intro-inner > .subject > .subject-inner > span {
-    font-size: 1.5em;
-}
-
-.intro > .intro-inner > .subject > .subject-inner >  h4 {
-    font-size:1.8em;
-    border-bottom: 1px solid lightgray;
-    color: #1e4ba0;
-}
-
-.intro > .intro-inner > strong {
-    position: absolute;
-    left:50%;
-    transform: translateX(-50%);
-    top:330px;
-    font-size: 2em;
-    padding: 0 5px 5px;
-    border-bottom:3px solid #1e4ba0;
-    display: none;
-}
- */
-
-
-
-/* .intro > .intro-inner > .subject > .subject-inner >  p {
-    font-size:1.8em;
-    border-bottom: 1px solid lightgray;
-    text-align: center;
-    margin-top: 10px;
-} */
-
-/* .intro > .intro-inner > .subject > h4 {
-    font-size:1.8em;
-    text-align: center;
-    color: #1e4ba0;
-}
-
-.intro > .intro-inner > .subject > h4 > span {
-    color: #000;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.intro > .intro-inner > .subject::before {
-    content: '';
-    position: absolute;
-    background-color: #db553c;
-    width: 110px;
-    height: 33px;
-    transform: rotateZ(-31deg);
-    left: -30px;
-    top: 7px;
-    display: none;
-} */

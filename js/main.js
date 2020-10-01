@@ -4,8 +4,8 @@ const greetingsArea = body.querySelector('.greetings-area');
 const greetingsForm = greetingsArea.querySelector('.greetings-form');
 const greetingsInput = greetingsArea.querySelector('.greetings-form > input');
 
-const subTitle = body.querySelector('.todolist-area .username');
-
+const username = body.querySelector('.todolist-area > .sub-title > .username');
+const titleMsg = body.querySelector('.todolist-area > .sub-title > .title-msg');
 
 const localUser = 'currentUser';
 const classNm = 'active'
@@ -34,8 +34,44 @@ function askForName(){
 function paintGreeting(text) {
     greetingsArea.style.display = 'none';
     body.classList.remove(classNm);
-    subTitle.innerHTML = `${text}'s today list`
+    username.innerHTML = text
+    titleMsg.innerHTML = `'s today list`
+    // `${text}'s today list`
 }
+
+function usernameKeyEvent(event){
+    console.log(event.target);
+
+}
+
+
+function keyEvent(ev) {
+    const keyCode = ev.keyCode;
+    // enter 입력시
+    if ( keyCode === 13 ) {
+        this.blur();
+        
+    }
+}
+
+function blurEvent(ev) {
+    const oldUsername = localStorage.getItem(localUser);
+    const newUsername = ev.target.innerText;
+
+    // username 입력시 기존에 있던 이름과 같지않으면
+    if( oldUsername !== newUsername ) {
+        // 빈값이 들어오면
+        if( newUsername === '' ) {
+            ev.target.innerText = oldUsername
+        }else {
+            ev.target.innerText = newUsername;
+            saveUser(newUsername)
+        }
+    }
+
+}
+
+
 
 // 로컬스토리지에서 username을 가져오는 역할
 function loadName(){
@@ -54,7 +90,10 @@ function loadName(){
 }
 
 
+
 function init () {
+    username.addEventListener('blur',blurEvent);
+    username.addEventListener('keyup',keyEvent);
     loadName()
 }
 
@@ -66,6 +105,8 @@ const todoForm = document.querySelector('.todolist-area > .todo-form')
 const todoInput = todoForm.querySelector('.todo-input');
 const todoList = document.querySelector('.todolist-content > ul');
 const localTodo = 'toDos';
+const emptyBox = document.querySelector('.todolist-content > .empty-box');
+
 
 let toDos = [];
 
@@ -93,6 +134,9 @@ function deleteTodo(event){
         item.id = index + 1;
         lis[index].id = item.id
     })
+    if( toDos.length == 0 ) {
+        emptyBox.style.display = 'block'
+    }
 
     saveToDos();
 }
@@ -223,6 +267,8 @@ function paintTodo(text,check){
     li.appendChild(label);
     li.appendChild(todoTxtspan);
     li.appendChild(btnBox);
+
+    li.classList.add('list-ani')
     
 
     todoList.appendChild(li);
@@ -237,7 +283,6 @@ function paintTodo(text,check){
     toDos.push(toDoObj);
 
     saveToDos()
-    
 }
 
 // todolist submit
@@ -248,12 +293,13 @@ function listSubmit(ev){
 
     if( status ) {
         console.log('투두리스트 서브밋');
-        paintTodo(currentValue,check)
+        paintTodo(currentValue,check);
+        emptyBox.style.display = 'none'
         todoInput.value = '';
+        
 
     }else return false
 
-    
 }
 
 // 첫 로드시 로컬에서 투두리스트 가져오기
@@ -271,9 +317,36 @@ function loadTodos(){
     }
 }
 
+
+const dayNames = [
+    'Sun',
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thurs',
+    'Fri',
+    'Sat'
+]
+
+const todoDay = document.querySelector('.todolist-area > .date');
+
+function dateSetting() {
+    let today = new Date();
+    let date = today.getDate();
+    date = date >= 10 ? date : `0${date}`;
+    let month = today.getMonth() + 1;
+    month = month >= 10 ? month : `0${month}`;
+    let day = dayNames[today.getDay()];
+    const format = `${month}/${date} ${day}`;
+
+    todoDay.innerHTML = format
+}
+
 // init
 function todoInit(){   
     loadTodos();
+    dateSetting();
+    console.log(toDos.length);
 
     // todolist 입력 이벤트
     todoForm.addEventListener('submit',listSubmit);
@@ -286,7 +359,19 @@ function todoInit(){
         if(item.check === 'check') {
             lis[item.id - 1].classList.add('checked')
         }
-    })
+    });
+
+    lis.forEach(elm => {
+        elm.classList.remove('list-ani')
+    });
+
+    if( toDos.length > 0 ) {
+        emptyBox.style.display = 'none'
+    }
+
+
 }
+
+
 
 todoInit();
